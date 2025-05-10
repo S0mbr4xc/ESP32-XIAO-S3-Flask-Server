@@ -189,14 +189,19 @@ def generate_video_stream1b():
         blur = blur_image(frame)
         median = median_blur(frame)
         edges = detect_edges_canny(blur)
+        edges2 = detect_edges_canny(median)
         sovel = detect_edges_sobel(median)
+        sovel2 = detect_edges_sobel(blur)
+        
         
         imgs = [
             add_title(gausian, "Ruido Gaussiano" + str(slider_value)),
             add_title(blur, "Desenfoque(blur)"),
             add_title(median, "Desenfoque Mediana"),
             add_title(edges, "Bordes Canny en blur"),
-            add_title(sovel, "Bordes Sobel en mediana")
+            add_title(edges2, "Bordes Canny en Mediana"),
+            add_title(sovel, "Bordes Sobel en mediana"),
+            add_title(sovel2, "Bordes Sobel en Blur")
         ]
 
         resized_imgs = [cv2.resize(img, (300, 220)) for img in imgs]
